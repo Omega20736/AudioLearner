@@ -44,8 +44,8 @@ aligner = DTWChromaAligner()
 
 # Compute alignment
 # Change directories here
-# distance, path = aligner.align('C:/Users/Omega/Music/MusicAI/(Spotify).mp3', 'C:/Users/Omega/Music/MusicAI/Concert.mp3') # Chopin
-distance, path = aligner.align('C:/Users/Omega/Music/MusicAI/langSiciliano.mp3', 'C:/Users/Omega/Music/MusicAI/SicilianoBWV1031.mp3') # Siciliano
+distance, path = aligner.align('C:/Users/Omega/Music/MusicAI/(Spotify).mp3', 'C:/Users/Omega/Music/MusicAI/Concert.mp3') # Chopin
+#distance, path = aligner.align('C:/Users/Omega/Music/MusicAI/langSiciliano.mp3', 'C:/Users/Omega/Music/MusicAI/SicilianoBWV1031.mp3') # Siciliano
 
 # Compute time differences and pitches
 pitch_pairs = aligner.get_time_differences_and_pitches(path)
