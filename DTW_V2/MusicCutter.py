@@ -6,7 +6,7 @@ from DTW_V2.DTWChromaAligner import DTWChromaAligner
 
 
 class MusicCutter:
-    def __init__(self, reference_audio, fs=44100, duration=1):
+    def __init__(self, reference_audio, fs=22050, duration=1):
         self.fs = fs
         self.duration = duration
         self.timer = 0.0
@@ -28,29 +28,14 @@ class MusicCutter:
 
             # Align the live performance and reference audio and compute time difference
             distance, path = self.aligner.align(np.array(live_performance).flatten(), cut_reference)
-            pitch_pairs = self.aligner.get_time_differences_and_pitches(path)
+            time_differences = self.aligner.get_time_differences_and_pitches(path)
 
             # Get the time difference of the last pitch pair
-            time_diff = pitch_pairs[-1][1] if pitch_pairs else 0
+            time_diff = time_differences[-1] if time_differences else 0
 
             # Adjust timer for the next interval
-            self.timer += 1 + time_diff
+            self.timer = self.timer + 1 + time_diff
 
-            # Modify duration for the next reference audio interval
-            if time_diff < 0:
-                # If live performance is ahead, we squeeze (speed up) the reference
-                cut_reference = librosa.effects.time_stretch(y=cut_reference, rate=1 / (1 + time_diff))
-            else:
-                # If live performance is slower, we stretch (slow down) the reference
-                duration_samples = int(self.duration * self.fs * (1 + time_diff))
-                # Cut the next reference audio interval with updated duration
-                cut_reference = self.reference_audio[timestamp:timestamp + duration_samples]
-                # Pad the rest with empty noise (zeroes)
-                if len(cut_reference) < duration_samples:
-                    cut_reference = np.pad(cut_reference, (0, duration_samples - len(cut_reference)))
-
-            for i, (pitch, time_diff) in enumerate(pitch_pairs):
-                print(f"Step {i}: Pitch: {pitch}, Time difference: {time_diff} seconds")
-
+            print(f"time_diff: {time_diff} seconds")
             print(f"Current Timer: {self.timer} seconds")
 

@@ -5,7 +5,7 @@ import time
 
 
 class Recorder:
-    def __init__(self, fs=44100, channels=2, duration=1):
+    def __init__(self, fs=22050, channels=2, duration=1):
         self.fs = fs
         self.channels = channels
         self.duration = duration

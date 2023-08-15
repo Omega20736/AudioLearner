@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import librosa
 from scipy.spatial.distance import euclidean
@@ -27,6 +29,9 @@ class DTWChromaAligner:
     def get_time_differences_and_pitches(self, path):
         time_differences = []
         pitch_pairs = []
+
+        print("Pitch Pairs, Time Differences, and Timestamps:")  # Header for the console output
+
         for pair in path:
             time_diff = (pair[1] - pair[0]) * self.hop_length / self.sr
             time_differences.append(time_diff)
@@ -34,7 +39,12 @@ class DTWChromaAligner:
             pitch1 = self.pitch_classes[np.argmax(self.chroma1[:, pair[0]])]
             pitch2 = self.pitch_classes[np.argmax(self.chroma2[:, pair[1]])]
 
+            timestamp1 = pair[0] * self.hop_length / self.sr  # Timestamp in the first audio
+            timestamp2 = pair[1] * self.hop_length / self.sr  # Timestamp in the second audio
+
             if pitch1 == pitch2:
                 pitch_pairs.append((pitch1, time_diff))
+                print(f"Pitch: {pitch1} - Time Difference: {time_diff} seconds - Timestamp in Audio1: {timestamp1} seconds - Timestamp in Audio2: {timestamp2} seconds")  # Displaying each matching pitch pair
+                time.sleep(0.1)
 
-        return pitch_pairs
+        return time_differences
