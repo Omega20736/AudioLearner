@@ -36,23 +36,26 @@ class DTWChromaAligner:
             if pitch1 == pitch2:
                 pitch_pairs.append((pitch1, time_diff))
 
-        return pitch_pairs
+        for i, (pitch, time_diff) in enumerate(pitch_pairs):
+            print(f"Step {i}: Pitch: {pitch}, Time difference: {time_diff} seconds")
+
+
+        return np.mean(time_differences)
 
 
 # Instantiate the DTWChromaAligner class
-aligner = DTWChromaAligner()
+#aligner = DTWChromaAligner()
 
 # Compute alignment
 # Change directories here
-#distance, path = aligner.align('C:/Users/Omega/Music/MusicAI/Concert_cut.wav', 'C:/Users/Omega/Music/MusicAI/(Spotify)_cut.wav') # Chopin
-distance, path = aligner.align('C:/Users/Omega/Music/MusicAI/trimmed_Concert.mp3', 'C:/Users/Omega/Music/MusicAI/trimmed_(Spotify).mp3') # Chopin
+#distance, path = aligner.align('C:/Users/Omega/Music/MusicAI/(Spotify).mp3', 'C:/Users/Omega/Music/MusicAI/Concert.mp3') # Chopin
 #distance, path = aligner.align('C:/Users/Omega/Music/MusicAI/langSiciliano.mp3', 'C:/Users/Omega/Music/MusicAI/SicilianoBWV1031.mp3') # Siciliano
 
 # Compute time differences and pitches
-pitch_pairs = aligner.get_time_differences_and_pitches(path)
+#pitch_pairs, avg_time_diff = aligner.get_time_differences_and_pitches(path)
 
 # Print the time differences in seconds and the pitches
-for i, (pitch, time_diff) in enumerate(pitch_pairs):
-    print(f"Step {i}: Pitch: {pitch}, Time difference: {time_diff} seconds")
+#for i, (pitch, time_diff) in enumerate(pitch_pairs):
+#    print(f"Step {i}: Pitch: {pitch}, Time difference: {time_diff} seconds")
 
-
+#print(f"Average Time Difference: {avg_time_diff} seconds")

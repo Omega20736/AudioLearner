@@ -26,12 +26,12 @@ def detect_onsets(audio_file, start_time=0.0):
 # Load onsets
 # change directories here
 # Chopin
-#reference_onsets = detect_onsets('C:/Users/Omega/Music/MusicAI/Concert.mp3', start_time=1.0)
-#played_onsets = detect_onsets('C:/Users/Omega/Music/MusicAI/(Spotify).mp3', start_time=7.8)
+reference_onsets = detect_onsets('C:/Users/Omega/Music/MusicAI/Concert.mp3', start_time=1.0)
+played_onsets = detect_onsets('C:/Users/Omega/Music/MusicAI/(Spotify).mp3', start_time=7.8)
 
 # Siciliano
-reference_onsets = detect_onsets('C:/Users/Omega/Music/MusicAI/langSiciliano.mp3', start_time=3.0)
-played_onsets = detect_onsets('C:/Users/Omega/Music/MusicAI/SicilianoBWV1031.mp3', start_time=3.5)
+#reference_onsets = detect_onsets('C:/Users/Omega/Music/MusicAI/langSiciliano.mp3', start_time=3.0)
+#played_onsets = detect_onsets('C:/Users/Omega/Music/MusicAI/SicilianoBWV1031.mp3', start_time=3.5)
 
 # Create the sequences
 s1 = np.array(reference_onsets, ndmin=2).T
